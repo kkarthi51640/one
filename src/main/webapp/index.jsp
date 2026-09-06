@@ -1150,4 +1150,4 @@
                     <button id="searchBtn" aria-label="Submit search"><i class="fas fa-search"></i></button>
                 </div>
 
-                <
+                </head>
