@@ -8,397 +8,18 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* ========== ROOT VARIABLES (Hospital palette) ========== */
-        :root {
-            --bg: #f4f7fb;
-            --bg-card: #ffffff;
-            --primary: #0b2b4a;
-            --primary-light: #1a3f5f;
-            --accent: #2a7f9e;
-            --accent-light: #c8e2ed;
-            --accent-dark: #1d5f7a;
-            --muted: #4e5f6b;
-            --muted-light: #8b9ba8;
-            --surface: #e9eef3;
-            --success: #2a9d8f;
-            --warning: #e9c46a;
-            --radius: 16px;
-            --radius-sm: 10px;
-            --shadow: 0 4px 20px rgba(11, 43, 74, 0.06);
-            --shadow-hover: 0 12px 40px rgba(11, 43, 74, 0.10);
-            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --container: 1240px;
-        }
-
-        /* ========== RESET & BASE ========== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--primary);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        img {
-            display: block;
-            max-width: 100%;
-        }
-        button {
-            cursor: pointer;
-            font-family: inherit;
-            border: none;
-            background: none;
-            color: inherit;
-        }
-        input {
-            font-family: inherit;
-        }
-
-        .container {
-            width: 100%;
-            max-width: var(--container);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ========== UTILITIES ========== */
-        .muted {
-            color: var(--muted);
-        }
-        .text-center {
-            text-align: center;
-        }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        /* ========== BUTTONS ========== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 28px;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 15px;
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            border-color: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(42, 127, 158, 0.30);
-        }
-        .btn-secondary {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-        .btn-secondary:hover {
-            background: var(--primary-light);
-            border-color: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(11, 43, 74, 0.20);
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border-color: rgba(11, 43, 74, 0.15);
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-        .btn-ghost {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-        .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-2px);
-        }
-        .btn-sm {
-            padding: 8px 18px;
-            font-size: 13px;
-        }
-
-        /* ========== HEADER ========== */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(11, 43, 74, 0.04);
-        }
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 12px 0;
-            min-height: 68px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 22px;
-            letter-spacing: -0.5px;
-            color: var(--primary);
-            flex-shrink: 0;
-        }
-        .brand .accent {
-            color: var(--accent);
-        }
-        .brand i {
-            font-size: 26px;
-            color: var(--accent);
-        }
-
-        nav.main-nav ul {
-            display: flex;
-            gap: 4px;
-            list-style: none;
-            align-items: center;
-        }
-        nav.main-nav li a {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            font-weight: 500;
-            font-size: 14px;
-            color: var(--muted);
-            transition: var(--transition);
-        }
-        nav.main-nav li a:hover,
-        nav.main-nav li a.active {
-            background: var(--surface);
-            color: var(--primary);
-        }
-        nav.main-nav li a i {
-            font-size: 14px;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-        .header-actions .icon-btn {
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            font-size: 18px;
-            color: var(--muted);
-            transition: var(--transition);
-            position: relative;
-        }
-        .header-actions .icon-btn:hover {
-            background: var(--surface);
-            color: var(--primary);
-        }
-
-        .cart-wrap {
-            position: relative;
-        }
-        .cart-count {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: var(--accent);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            border: 2px solid #fff;
-        }
-
-        .search-wrap {
-            display: flex;
-            align-items: center;
-            background: var(--surface);
-            border-radius: 999px;
-            padding: 0 16px 0 18px;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            min-width: 220px;
-        }
-        .search-wrap:focus-within {
-            border-color: var(--accent);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(42, 127, 158, 0.10);
-        }
-        .search-wrap input {
-            border: 0;
-            background: transparent;
-            outline: none;
-            width: 100%;
-            padding: 10px 0;
-            font-size: 14px;
-            color: var(--primary);
-        }
-        .search-wrap input::placeholder {
-            color: var(--muted-light);
-        }
-        .search-wrap button {
-            padding: 8px 0 8px 10px;
-            color: var(--muted);
-            font-size: 15px;
-            transition: var(--transition);
-        }
-        .search-wrap button:hover {
-            color: var(--accent);
-        }
-
-        .mobile-toggle {
-            display: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            font-size: 20px;
-            background: var(--surface);
-            color: var(--primary);
-            transition: var(--transition);
-        }
-        .mobile-toggle:hover {
-            background: var(--accent-light);
-        }
-
-        #mobileMenu {
-            display: none;
-            background: #fff;
-            border-top: 1px solid rgba(11, 43, 74, 0.04);
-            padding: 12px 0 20px;
-        }
-        #mobileMenu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        #mobileMenu ul li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            font-weight: 500;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-        #mobileMenu ul li a:hover {
-            background: var(--surface);
-        }
-        #mobileMenu ul li a i {
-            width: 22px;
-            color: var(--muted);
-        }
-
-        /* ========== HERO ========== */
-        .hero {
-            position: relative;
-            display: flex;
-            align-items: center;
-            min-height: 480px;
-            padding: 60px 0;
-            border-radius: var(--radius);
-            overflow: hidden;
-            margin: 20px 24px 0;
-            background: linear-gradient(135deg, #0b2b4a 0%, #1a3f5f 100%);
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-            opacity: 0.25;
-            z-index: 0;
-        }
-        .hero .container {
-            position: relative;
-            z-index: 1;
-        }
-        .hero .badge {
-            display: inline-block;
-            background: rgba(42, 127, 158, 0.20);
-            color: #a6d9f0;
-            padding: 4px 16px;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: 0.3px;
-            margin-bottom: 16px;
-        }
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1.15;
-            max-width: 640px;
-            margin-bottom: 16px;
-        }
-        .hero p {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 17px;
-            max-width: 520px;
-            margin-bottom: 28px;
-            line-height: 1.6;
-        }
-        .hero .actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        /* ========== SECTION ========== */
+        /* Quick fix - make sure body has content */
         .section {
             padding: 56px 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
         .section-header {
             display: flex;
@@ -411,63 +32,64 @@
         .section-header .title-group h2 {
             font-size: 28px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
         .section-header .title-group p {
-            color: var(--muted);
+            color: #6b6b7a;
             margin-top: 4px;
             font-size: 15px;
         }
         .section-header .view-all {
             font-weight: 600;
-            color: var(--accent);
+            color: #2a7f9e;
             display: flex;
             align-items: center;
             gap: 6px;
             font-size: 14px;
-            transition: var(--transition);
+            transition: 0.25s;
             white-space: nowrap;
         }
         .section-header .view-all:hover {
             gap: 12px;
-            color: var(--accent-dark);
         }
-
-        /* ========== DEPARTMENTS (categories) ========== */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 16px;
         }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
         .cat-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
+            background: #fff;
+            border-radius: 16px;
             padding: 24px 16px;
             text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 4px 24px rgba(26, 26, 46, 0.06);
+            transition: 0.25s;
             cursor: pointer;
             border: 2px solid transparent;
         }
         .cat-card:hover {
             transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent-light);
+            box-shadow: 0 12px 48px rgba(26, 26, 46, 0.10);
+            border-color: #c8e2ed;
         }
         .cat-card .icon-wrap {
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: var(--accent-light);
+            background: #c8e2ed;
             display: grid;
             place-items: center;
             margin: 0 auto 12px;
             font-size: 24px;
-            color: var(--accent);
-            transition: var(--transition);
+            color: #2a7f9e;
+            transition: 0.25s;
         }
         .cat-card:hover .icon-wrap {
-            background: var(--accent);
+            background: #2a7f9e;
             color: #fff;
         }
         .cat-card h4 {
@@ -476,42 +98,35 @@
         }
         .cat-card .count {
             font-size: 13px;
-            color: var(--muted);
+            color: #6b6b7a;
             margin-top: 4px;
         }
-
-        /* ========== DOCTORS / SERVICES ========== */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
         .product-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
+            background: #fff;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 4px 24px rgba(26, 26, 46, 0.06);
+            transition: 0.25s;
             display: flex;
             flex-direction: column;
             border: 2px solid transparent;
         }
         .product-card:hover {
             transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent-light);
+            box-shadow: 0 12px 48px rgba(26, 26, 46, 0.10);
+            border-color: #c8e2ed;
         }
         .product-card .img-wrap {
             position: relative;
             overflow: hidden;
-            background: var(--surface);
+            background: #f0efed;
             aspect-ratio: 1 / 1;
         }
         .product-card .img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: 0.25s;
         }
         .product-card:hover .img-wrap img {
             transform: scale(1.04);
@@ -520,17 +135,16 @@
             position: absolute;
             top: 12px;
             left: 12px;
-            background: var(--accent);
+            background: #2a7f9e;
             color: #fff;
             padding: 4px 12px;
             border-radius: 999px;
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.3px;
         }
         .product-card .badge.sale {
-            background: var(--warning);
-            color: var(--primary);
+            background: #e9c46a;
+            color: #0b2b4a;
         }
         .product-card .wish-btn {
             position: absolute;
@@ -539,17 +153,17 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.90);
+            background: rgba(255,255,255,0.90);
             display: grid;
             place-items: center;
             font-size: 16px;
-            color: var(--muted);
-            transition: var(--transition);
-            backdrop-filter: blur(4px);
+            color: #6b6b7a;
+            transition: 0.25s;
+            border: none;
         }
         .product-card .wish-btn:hover {
             background: #fff;
-            color: var(--accent);
+            color: #2a7f9e;
             transform: scale(1.10);
         }
         .product-card .body {
@@ -561,7 +175,7 @@
         }
         .product-card .body .category-tag {
             font-size: 12px;
-            color: var(--muted-light);
+            color: #a0a0b0;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
@@ -570,10 +184,6 @@
             font-size: 15px;
             font-weight: 600;
             line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
         .product-card .body .price-row {
             display: flex;
@@ -584,10 +194,10 @@
         .product-card .body .price {
             font-weight: 700;
             font-size: 18px;
-            color: var(--primary);
+            color: #0b2b4a;
         }
         .product-card .body .old-price {
-            color: var(--muted-light);
+            color: #a0a0b0;
             text-decoration: line-through;
             font-size: 14px;
         }
@@ -599,7 +209,7 @@
             color: #f5a623;
         }
         .product-card .body .rating span {
-            color: var(--muted);
+            color: #6b6b7a;
             font-weight: 400;
         }
         .product-card .footer {
@@ -610,544 +220,251 @@
         .product-card .footer .add-btn {
             flex: 1;
             padding: 10px;
-            border-radius: var(--radius-sm);
-            background: var(--primary);
+            border-radius: 10px;
+            background: #0b2b4a;
             color: #fff;
             font-weight: 600;
             font-size: 14px;
-            transition: var(--transition);
+            transition: 0.25s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            border: none;
         }
         .product-card .footer .add-btn:hover {
-            background: var(--accent);
+            background: #2a7f9e;
             transform: scale(1.02);
         }
         .product-card .footer .add-btn.added {
-            background: var(--success);
+            background: #2a9d8f;
         }
 
-        /* ========== DEAL / OFFER ========== */
-        .deal-wrap {
-            display: flex;
-            gap: 0;
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .deal-wrap .deal-img {
-            flex: 0 0 48%;
-            background: var(--surface);
-            min-height: 300px;
-        }
-        .deal-wrap .deal-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .deal-wrap .deal-content {
-            flex: 1;
-            padding: 40px 44px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .deal-wrap .deal-content .tag {
-            display: inline-block;
-            background: var(--warning);
-            color: var(--primary);
-            padding: 4px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            align-self: flex-start;
-            margin-bottom: 12px;
-        }
-        .deal-wrap .deal-content h3 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .deal-wrap .deal-content .desc {
-            color: var(--muted);
-            margin-bottom: 18px;
-        }
-        .deal-wrap .deal-content .price-big {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--primary);
-        }
-        .deal-wrap .deal-content .price-big .old {
-            font-size: 20px;
-            font-weight: 400;
-            color: var(--muted-light);
-            text-decoration: line-through;
-            margin-left: 10px;
-        }
-        .deal-wrap .deal-content .stock {
-            font-size: 14px;
-            color: var(--muted);
-            margin: 4px 0 16px;
-        }
-        .deal-wrap .deal-content .stock strong {
-            color: var(--accent);
-        }
-
-        .timer-grid {
-            display: flex;
-            gap: 12px;
-            margin: 16px 0 20px;
-        }
-        .timer-box {
-            background: var(--primary);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            min-width: 68px;
-            text-align: center;
-        }
-        .timer-box .num {
-            font-size: 26px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        .timer-box .label {
-            font-size: 11px;
-            opacity: 0.70;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* ========== TESTIMONIALS ========== */
-        .testimonials-scroll {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 8px 4px 16px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .testimonials-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-        .testimonials-scroll::-webkit-scrollbar-thumb {
-            background: var(--accent-light);
-            border-radius: 999px;
-        }
-        .testimonial-card {
-            flex: 0 0 340px;
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 24px 26px;
-            box-shadow: var(--shadow);
-            scroll-snap-align: start;
-            transition: var(--transition);
-        }
-        .testimonial-card:hover {
-            box-shadow: var(--shadow-hover);
-        }
-        .testimonial-card .stars {
-            color: #f5a623;
-            font-size: 16px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .testimonial-card blockquote {
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--primary);
-            margin-bottom: 14px;
-            font-style: italic;
-        }
-        .testimonial-card .author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .testimonial-card .author .avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: var(--surface);
-        }
-        .testimonial-card .author .name {
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .testimonial-card .author .role {
-            font-size: 13px;
-            color: var(--muted);
-        }
-
-        /* ========== NEWSLETTER / HEALTH TIPS ========== */
-        .newsletter-wrap {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: var(--radius);
-            padding: 48px 56px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-        .newsletter-wrap .text h3 {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .newsletter-wrap .text p {
-            opacity: 0.75;
-            font-size: 15px;
-        }
-        .newsletter-wrap form {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            flex: 1;
-            max-width: 480px;
-        }
-        .newsletter-wrap form input {
-            flex: 1;
-            min-width: 200px;
-            padding: 14px 20px;
-            border-radius: 999px;
-            border: 0;
-            font-size: 15px;
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transition: var(--transition);
-            outline: 2px solid transparent;
-        }
-        .newsletter-wrap form input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .newsletter-wrap form input:focus {
-            outline-color: var(--accent);
-            background: rgba(255, 255, 255, 0.18);
-        }
-        .newsletter-wrap form .btn {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            padding: 14px 32px;
-        }
-        .newsletter-wrap form .btn:hover {
-            background: var(--accent-dark);
-            border-color: var(--accent-dark);
-        }
-        #newsletterMsg {
-            margin-top: 12px;
-            font-size: 14px;
-            opacity: 0.9;
-            width: 100%;
-        }
-
-        /* ========== FOOTER ========== */
-        footer {
-            margin-top: 16px;
-            padding: 44px 0 28px;
-            border-top: 1px solid rgba(11, 43, 74, 0.04);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 32px;
-        }
-        .footer-grid .brand-col .brand {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        .footer-grid .brand-col p {
-            color: var(--muted);
-            font-size: 14px;
-            max-width: 300px;
-            line-height: 1.6;
-        }
-        .footer-grid .brand-col .socials {
-            display: flex;
-            gap: 10px;
-            margin-top: 14px;
-        }
-        .footer-grid .brand-col .socials a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--surface);
-            display: grid;
-            place-items: center;
-            color: var(--muted);
-            transition: var(--transition);
-            font-size: 16px;
-        }
-        .footer-grid .brand-col .socials a:hover {
-            background: var(--accent);
-            color: #fff;
-        }
-        .footer-grid .col h5 {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
-        .footer-grid .col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .footer-grid .col ul li a {
-            color: var(--muted);
-            font-size: 14px;
-            transition: var(--transition);
-        }
-        .footer-grid .col ul li a:hover {
-            color: var(--accent);
-        }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(11, 43, 74, 0.04);
-            color: var(--muted-light);
-            font-size: 13px;
-        }
-
-        /* ========== RESPONSIVE ========== */
+        /* Responsive */
         @media (max-width: 1200px) {
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .categories-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 28px;
-            }
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+            .categories-grid { grid-template-columns: repeat(3, 1fr); }
         }
-
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-            .hero {
-                min-height: 380px;
-                margin: 16px 16px 0;
-                padding: 40px 0;
-            }
-            .deal-wrap {
-                flex-direction: column;
-            }
-            .deal-wrap .deal-img {
-                flex: 0 0 240px;
-            }
-            .deal-wrap .deal-content {
-                padding: 28px 30px;
-            }
-            .newsletter-wrap {
-                padding: 32px 28px;
-                flex-direction: column;
-                text-align: center;
-            }
-            .newsletter-wrap form {
-                max-width: 100%;
-            }
-            .search-wrap {
-                min-width: 150px;
-            }
-        }
-
         @media (max-width: 768px) {
-            nav.main-nav {
-                display: none;
-            }
-            .mobile-toggle {
-                display: grid;
-                place-items: center;
-            }
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 14px;
-            }
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .hero h1 {
-                font-size: 28px;
-            }
-            .hero p {
-                font-size: 15px;
-            }
-            .section-header h2 {
-                font-size: 22px;
-            }
-            .deal-wrap .deal-content h3 {
-                font-size: 22px;
-            }
-            .deal-wrap .deal-content .price-big {
-                font-size: 26px;
-            }
-            .timer-box {
-                min-width: 56px;
-                padding: 8px 12px;
-            }
-            .timer-box .num {
-                font-size: 20px;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .header-inner {
-                flex-wrap: nowrap;
-            }
-            .brand {
-                font-size: 18px;
-            }
-            .brand i {
-                font-size: 20px;
-            }
-            .search-wrap {
-                min-width: 120px;
-                padding: 0 10px 0 14px;
-            }
-            .search-wrap input {
-                font-size: 13px;
-                padding: 8px 0;
-            }
-            .header-actions .icon-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 15px;
-            }
-            .cart-count {
-                width: 18px;
-                height: 18px;
-                font-size: 10px;
-            }
-            .testimonial-card {
-                flex: 0 0 280px;
-            }
-            .hero .actions .btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-            .section {
-                padding: 36px 0;
-            }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .categories-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 480px) {
-            .products-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .categories-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .hero {
-                margin: 10px 10px 0;
-                min-height: 300px;
-                padding: 28px 0;
-                border-radius: var(--radius-sm);
-            }
-            .hero h1 {
-                font-size: 24px;
-            }
-            .container {
-                padding: 0 14px;
-            }
-            .deal-wrap .deal-content {
-                padding: 20px 18px;
-            }
-            .deal-wrap .deal-img {
-                flex: 0 0 180px;
-            }
-            .newsletter-wrap {
-                padding: 24px 18px;
-            }
-            .newsletter-wrap .text h3 {
-                font-size: 20px;
-            }
-            .product-card .body {
-                padding: 12px 12px 8px;
-            }
-            .product-card .body h5 {
-                font-size: 13px;
-            }
-            .product-card .body .price {
-                font-size: 15px;
-            }
-            .product-card .footer {
-                padding: 0 12px 12px;
-            }
-            .product-card .footer .add-btn {
-                font-size: 12px;
-                padding: 8px;
-            }
-            .timer-box {
-                min-width: 46px;
-                padding: 6px 8px;
-            }
-            .timer-box .num {
-                font-size: 16px;
-            }
-            .timer-box .label {
-                font-size: 9px;
-            }
-            .cat-card {
-                padding: 16px 10px;
-            }
-            .cat-card .icon-wrap {
-                width: 44px;
-                height: 44px;
-                font-size: 18px;
-            }
-            .cat-card h4 {
-                font-size: 13px;
-            }
+            .products-grid { grid-template-columns: 1fr 1fr; }
+            .categories-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
-
 <body>
 
     <!-- ===== HEADER ===== -->
     <header>
-        <div class="container header-inner">
+        <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;min-height:68px;">
             <div style="display:flex;align-items:center;gap:12px;">
-                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" style="display:none;width:42px;height:42px;border-radius:50%;font-size:20px;background:#e9eef3;border:none;cursor:pointer;">
                     <i class="fas fa-bars"></i>
                 </button>
-                <a class="brand" href="#">
-                    <i class="fas fa-heartbeat"></i>
-                    <span>DevOps<span class="accent">Hospital</span></span>
+                <a class="brand" href="#" style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;color:#0b2b4a;">
+                    <i class="fas fa-heartbeat" style="color:#2a7f9e;"></i>
+                    <span>DevOps<span style="color:#2a7f9e;">Hospital</span></span>
                 </a>
             </div>
 
             <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-                <ul>
-                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#categories"><i class="fas fa-stethoscope"></i> Departments</a></li>
-                    <li><a href="#products"><i class="fas fa-user-md"></i> Doctors</a></li>
-                    <li><a href="#deals"><i class="fas fa-ambulance"></i> Offers</a></li>
-                    <li><a href="#testimonials"><i class="fas fa-star"></i> Reviews</a></li>
+                <ul style="display:flex;gap:4px;list-style:none;align-items:center;">
+                    <li><a href="#" class="active" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;font-weight:500;font-size:14px;color:#4e5f6b;transition:0.25s;text-decoration:none;"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#categories" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;font-weight:500;font-size:14px;color:#4e5f6b;transition:0.25s;text-decoration:none;"><i class="fas fa-stethoscope"></i> Departments</a></li>
+                    <li><a href="#products" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;font-weight:500;font-size:14px;color:#4e5f6b;transition:0.25s;text-decoration:none;"><i class="fas fa-user-md"></i> Doctors</a></li>
+                    <li><a href="#deals" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;font-weight:500;font-size:14px;color:#4e5f6b;transition:0.25s;text-decoration:none;"><i class="fas fa-ambulance"></i> Offers</a></li>
+                    <li><a href="#testimonials" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;font-weight:500;font-size:14px;color:#4e5f6b;transition:0.25s;text-decoration:none;"><i class="fas fa-star"></i> Reviews</a></li>
                 </ul>
             </nav>
 
             <div style="display:flex;align-items:center;gap:10px;">
-                <div class="search-wrap" role="search">
-                    <input type="search" id="searchInput" placeholder="Find a doctor..." aria-label="Search" />
-                    <button id="searchBtn" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                <div class="search-wrap" role="search" style="display:flex;align-items:center;background:#e9eef3;border-radius:999px;padding:0 16px 0 18px;transition:0.25s;border:2px solid transparent;min-width:220px;">
+                    <input type="search" id="searchInput" placeholder="Find a doctor..." aria-label="Search" style="border:0;background:transparent;outline:none;width:100%;padding:10px 0;font-size:14px;color:#0b2b4a;" />
+                    <button id="searchBtn" aria-label="Submit search" style="padding:8px 0 8px 10px;color:#4e5f6b;font-size:15px;transition:0.25s;border:none;background:none;cursor:pointer;"><i class="fas fa-search"></i></button>
                 </div>
 
-                <
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <button class="icon-btn" title="Account" aria-label="Account" style="width:42px;height:42px;display:grid;place-items:center;border-radius:50%;font-size:18px;color:#4e5f6b;transition:0.25s;border:none;background:none;cursor:pointer;"><i class="far fa-user"></i></button>
+                    <button class="icon-btn" title="Wishlist" aria-label="Wishlist" style="width:42px;height:42px;display:grid;place-items:center;border-radius:50%;font-size:18px;color:#4e5f6b;transition:0.25s;border:none;background:none;cursor:pointer;"><i class="far fa-heart"></i></button>
+                    <div class="cart-wrap" style="position:relative;">
+                        <button class="icon-btn" id="cartBtn" title="Appointments" aria-label="Appointments" style="width:42px;height:42px;display:grid;place-items:center;border-radius:50%;font-size:18px;color:#4e5f6b;transition:0.25s;border:none;background:none;cursor:pointer;">
+                            <i class="fas fa-calendar-check"></i>
+                        </button>
+                        <span class="cart-count" id="cartCount" style="position:absolute;top:-2px;right:-2px;background:#2a7f9e;color:#fff;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;border:2px solid #fff;">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" style="display:none;background:#fff;border-top:1px solid rgba(11,43,74,0.04);padding:12px 0 20px;">
+            <div class="container">
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:4px;">
+                    <li><a href="#" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;font-weight:500;color:#0b2b4a;transition:0.25s;text-decoration:none;"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#categories" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;font-weight:500;color:#0b2b4a;transition:0.25s;text-decoration:none;"><i class="fas fa-stethoscope"></i> Departments</a></li>
+                    <li><a href="#products" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;font-weight:500;color:#0b2b4a;transition:0.25s;text-decoration:none;"><i class="fas fa-user-md"></i> Doctors</a></li>
+                    <li><a href="#deals" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;font-weight:500;color:#0b2b4a;transition:0.25s;text-decoration:none;"><i class="fas fa-ambulance"></i> Offers</a></li>
+                    <li><a href="#testimonials" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;font-weight:500;color:#0b2b4a;transition:0.25s;text-decoration:none;"><i class="fas fa-star"></i> Reviews</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+
+        <!-- HERO -->
+        <section class="hero" aria-label="Hero banner" style="position:relative;display:flex;align-items:center;min-height:480px;padding:60px 0;border-radius:16px;overflow:hidden;margin:20px 24px 0;background:linear-gradient(135deg,#0b2b4a 0%,#1a3f5f 100%);">
+            <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;opacity:0.25;z-index:0;"></div>
+            <div class="container" style="position:relative;z-index:1;">
+                <div style="display:inline-block;background:rgba(42,127,158,0.20);color:#a6d9f0;padding:4px 16px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:0.3px;margin-bottom:16px;"><i class="fas fa-sparkles"></i> Compassionate Care</div>
+                <h1 style="font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:#fff;line-height:1.15;max-width:640px;margin-bottom:16px;">Your Health, <br>Our Priority</h1>
+                <p style="color:rgba(255,255,255,0.85);font-size:17px;max-width:520px;margin-bottom:28px;line-height:1.6;">Expert doctors, modern facilities, and compassionate care — all in one place. Book your appointment today.</p>
+                <div class="actions" style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <button class="btn btn-primary" id="shopNow" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;border-radius:999px;font-weight:600;font-size:15px;transition:0.25s;border:2px solid #2a7f9e;background:#2a7f9e;color:#fff;cursor:pointer;"><i class="fas fa-calendar-plus"></i> Book Now</button>
+                    <button class="btn btn-ghost" id="exploreDeals" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;border-radius:999px;font-weight:600;font-size:15px;transition:0.25s;border:2px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;"><i class="fas fa-clock"></i> Explore Offers</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES / DEPARTMENTS -->
+        <section class="section" id="categories" aria-labelledby="cat-title" style="padding:56px 0;">
+            <div class="container">
+                <div class="section-header">
+                    <div class="title-group">
+                        <h2 id="cat-title">Our Departments</h2>
+                        <p>Find specialized care from our expert teams</p>
+                    </div>
+                    <a href="#" class="view-all">All Departments <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="categories-grid" id="categoriesGrid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <!-- DOCTORS / SERVICES -->
+        <section class="section" id="products" aria-labelledby="prod-title" style="padding:56px 0;">
+            <div class="container">
+                <div class="section-header">
+                    <div class="title-group">
+                        <h2 id="prod-title">Our Doctors</h2>
+                        <p>Meet our experienced medical specialists</p>
+                    </div>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="products-grid" id="productsGrid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <!-- DEAL / OFFER -->
+        <section class="section" id="deals" aria-labelledby="deals-title" style="padding:56px 0;">
+            <div class="container">
+                <div class="section-header">
+                    <div class="title-group">
+                        <h2 id="deals-title">⚡ Health Package Offer</h2>
+                        <p>Limited time — comprehensive health checkup at special price</p>
+                    </div>
+                </div>
+                <div class="deal-wrap" style="display:flex;gap:0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(26,26,46,0.06);">
+                    <div class="deal-img" style="flex:0 0 48%;background:#e9eef3;min-height:300px;">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Health Checkup" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div class="deal-content" style="flex:1;padding:40px 44px;display:flex;flex-direction:column;justify-content:center;">
+                        <span class="tag" style="display:inline-block;background:#e9c46a;color:#0b2b4a;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;align-self:flex-start;margin-bottom:12px;"><i class="fas fa-bolt"></i> Limited Offer</span>
+                        <h3 style="font-size:28px;font-weight:700;margin-bottom:6px;color:#0b2b4a;">Complete Health Checkup</h3>
+                        <p class="desc" style="color:#4e5f6b;margin-bottom:18px;">Full body checkup with specialist consultation, lab tests, and imaging.</p>
+                        <div>
+                            <span class="price-big" style="font-size:32px;font-weight:800;color:#0b2b4a;">$199 <span class="old" style="font-size:20px;font-weight:400;color:#8b9ba8;text-decoration:line-through;margin-left:10px;">$349</span></span>
+                        </div>
+                        <p class="stock" style="font-size:14px;color:#4e5f6b;margin:4px 0 16px;">Only <strong style="color:#2a7f9e;">12</strong> packages left — book now!</p>
+                        <div class="timer-grid" id="dealTimer" style="display:flex;gap:12px;margin:16px 0 20px;">
+                            <div class="timer-box" style="background:#0b2b4a;color:#fff;padding:10px 16px;border-radius:10px;min-width:68px;text-align:center;">
+                                <div class="num" id="dealDays" style="font-size:26px;font-weight:700;line-height:1.2;">0</div>
+                                <div class="label" style="font-size:11px;opacity:0.70;text-transform:uppercase;letter-spacing:0.5px;">Days</div>
+                            </div>
+                            <div class="timer-box" style="background:#0b2b4a;color:#fff;padding:10px 16px;border-radius:10px;min-width:68px;text-align:center;">
+                                <div class="num" id="dealHours" style="font-size:26px;font-weight:700;line-height:1.2;">00</div>
+                                <div class="label" style="font-size:11px;opacity:0.70;text-transform:uppercase;letter-spacing:0.5px;">Hours</div>
+                            </div>
+                            <div class="timer-box" style="background:#0b2b4a;color:#fff;padding:10px 16px;border-radius:10px;min-width:68px;text-align:center;">
+                                <div class="num" id="dealMinutes" style="font-size:26px;font-weight:700;line-height:1.2;">00</div>
+                                <div class="label" style="font-size:11px;opacity:0.70;text-transform:uppercase;letter-spacing:0.5px;">Mins</div>
+                            </div>
+                            <div class="timer-box" style="background:#0b2b4a;color:#fff;padding:10px 16px;border-radius:10px;min-width:68px;text-align:center;">
+                                <div class="num" id="dealSeconds" style="font-size:26px;font-weight:700;line-height:1.2;">00</div>
+                                <div class="label" style="font-size:11px;opacity:0.70;text-transform:uppercase;letter-spacing:0.5px;">Secs</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="buyDeal" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;border-radius:999px;font-weight:600;font-size:15px;transition:0.25s;border:2px solid #2a7f9e;background:#2a7f9e;color:#fff;cursor:pointer;"><i class="fas fa-calendar-plus"></i> Book Package</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="section" id="testimonials" aria-labelledby="test-title" style="padding:56px 0;">
+            <div class="container">
+                <div class="section-header">
+                    <div class="title-group">
+                        <h2 id="test-title">What Our Patients Say</h2>
+                        <p>Real stories from real people</p>
+                    </div>
+                </div>
+                <div class="testimonials-scroll" id="testimonialsList" style="display:flex;gap:20px;overflow-x:auto;padding:8px 4px 16px;scroll-snap-type:x mandatory;"></div>
+            </div>
+        </section>
+
+        <!-- NEWSLETTER / HEALTH TIPS -->
+        <section class="section" aria-labelledby="news-title" style="padding:56px 0;">
+            <div class="container">
+                <div class="newsletter-wrap" style="background:linear-gradient(135deg,#0b2b4a 0%,#1a3f5f 100%);border-radius:16px;padding:48px 56px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+                    <div class="text">
+                        <h3 id="news-title" style="font-size:26px;font-weight:700;margin-bottom:4px;color:#fff;">Stay Healthy</h3>
+                        <p style="opacity:0.75;font-size:15px;">Get health tips, offers & new services</p>
+                    </div>
+                    <form id="newsletterForm" onsubmit="return false;" style="display:flex;gap:10px;flex-wrap:wrap;flex:1;max-width:480px;">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email" aria-label="Email" required style="flex:1;min-width:200px;padding:14px 20px;border-radius:999px;border:0;font-size:15px;background:rgba(255,255,255,0.12);color:#fff;transition:0.25s;outline:2px solid transparent;" />
+                        <button class="btn" id="subscribeBtn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;border-radius:999px;font-weight:600;font-size:15px;transition:0.25s;border:2px solid #2a7f9e;background:#2a7f9e;color:#fff;cursor:pointer;"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                        <div id="newsletterMsg" style="margin-top:12px;font-size:14px;opacity:0.9;width:100%;"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer style="margin-top:16px;padding:44px 0 28px;border-top:1px solid rgba(11,43,74,0.04);background:#0b2b4a;color:rgba(255,255,255,0.8);">
+        <div class="container">
+            <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px;">
+                <div class="brand-col">
+                    <div class="brand" style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;margin-bottom:8px;">
+                        <i class="fas fa-heartbeat" style="color:#2a7f9e;"></i>
+                        <span>DevOps<span style="color:#2a7f9e;">Hospital</span></span>
+                    </div>
+                    <p style="color:rgba(255,255,255,0.7);font-size:14px;max-width:300px;line-height:1.6;">Modern healthcare with compassion. Quality treatment, seamless experience.</p>
+                    <div class="socials" style="display:flex;gap:10px;margin-top:14px;">
+                        <a href="#" aria-label="Facebook" style="display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);transition:0.25s;font-size:16px;text-decoration:none;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" style="display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);transition:0.25s;font-size:16px;text-decoration:none;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" style="display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);transition:0.25s;font-size:16px;text-decoration:none;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube" style="display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);transition:0.25s;font-size:16px;text-decoration:none;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5 style="font-weight:700;font-size:14px;margin-bottom:12px;color:#fff;">Hospital</h5>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+                        <li><a href="#" style="color:rgba(255,255,255,0.6);font-size:14px;transition:0.25s;text-decoration:none;">About Us</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.6);font-size:14px;transition:0.25s;text-decoration:none;">Careers</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.6);font-size:14px;transition:0.25s;text-decoration:none;">Press</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.6);font-size:14px;transition:0.25s;text-decoration:none;">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h5 style="font-weight:700;font-size:14px;margin-bottom:12px;color:#fff;">Support</h5>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+                        <li><a href="#" style="color:rgba(255,255,255,0.6);font-size:14px;transition:0.25s;text-decoration:none;">Help Center</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.6);font-size:14px;transition:0.25s;text-decoration:none;">Appointments</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.6);font-size:14px;transition:0.25s;text-decoration:none;">Emergency</a></li>
+                        <li><a href="#" style="color
