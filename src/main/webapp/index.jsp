@@ -1122,7 +1122,7 @@
 <body>
 
     <!-- ===== HEADER ===== -->
-   
+    <header>
         <div class="container header-inner">
             <div style="display:flex;align-items:center;gap:12px;">
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -1136,11 +1136,11 @@
 
             <nav class="main-nav" id="mainNav" aria-label="Main navigation">
                 <ul>
-                    <li><a href="#" class="active"><i class="fas fa-home"></i> Illu</a></li>
-                    <li><a href="#categories"><i class="fas fa-stethoscope"></i> Shakhalu</a></li>
-                    <li><a href="#products"><i class="fas fa-user-md"></i> vaidyulu</a></li>
-                    <li><a href="#deals"><i class="fas fa-ambulance"></i> bahumathulu</a></li>
-                    <li><a href="#testimonials"><i class="fas fa-star"></i> chusi cheppetollu</a></li>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#categories"><i class="fas fa-stethoscope"></i> Departments</a></li>
+                    <li><a href="#products"><i class="fas fa-user-md"></i> Doctors</a></li>
+                    <li><a href="#deals"><i class="fas fa-ambulance"></i> Offers</a></li>
+                    <li><a href="#testimonials"><i class="fas fa-star"></i> Reviews</a></li>
                 </ul>
             </nav>
 
@@ -1150,4 +1150,4 @@
                     <button id="searchBtn" aria-label="Submit search"><i class="fas fa-search"></i></button>
                 </div>
 
-                </head>
+                <
