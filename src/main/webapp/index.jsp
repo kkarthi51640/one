@@ -262,10 +262,10 @@
         <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;min-height:68px;">
             <div style="display:flex;align-items:center;gap:12px;">
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" style="display:none;width:42px;height:42px;border-radius:50%;font-size:20px;background:#e9eef3;border:none;cursor:pointer;">
-                    <i class="fas fa-bars"></i>
+                    <em class="fas fa-bars"></em>
                 </button>
                 <a class="brand" href="#" style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;color:#0b2b4a;">
-                    <i class="fas fa-heartbeat" style="color:#2a7f9e;"></i>
+                    <em class="fas fa-heartbeat" style="color:#2a7f9e;"></em>
                     <span>DevOps<span style="color:#2a7f9e;">Hospital</span></span>
                 </a>
             </div>
